@@ -150,7 +150,7 @@ public class SecurityConfiguration {
 
         @Bean
         public AuthenticationSuccessHandler successHandler() {
-            SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler("/api/index");
+            SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler("/index");
             handler.setUseReferer(true);
             return handler;
         }
