@@ -24,7 +24,6 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
                                         Authentication authentication)
             throws ServletException, IOException {
 
-        response.setContentType("application/json;charset=UTF-8");
         PrintWriter writer = response.getWriter();
         writer.write(new GsonBuilder().create().toJson(authentication));
         response.setStatus(HttpServletResponse.SC_OK);

@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.leanstacks.ws.security.AccountAuthenticationProvider;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 /**
@@ -46,6 +47,8 @@ public class SecurityConfiguration {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 
     /**
      * This method builds the AuthenticationProvider used by the system to
@@ -145,6 +148,13 @@ public class SecurityConfiguration {
              @Autowired
              private AuthenticationSuccessHandler restAuthenticationSuccessHandler;
 
+        @Bean
+        public AuthenticationSuccessHandler successHandler() {
+            SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler("/api/index");
+            handler.setUseReferer(true);
+            return handler;
+        }
+
         @Override
         protected void configure(final HttpSecurity http) throws Exception {
 
@@ -157,9 +167,10 @@ public class SecurityConfiguration {
               .and()
               .formLogin()
                     .loginProcessingUrl("/authenticate").permitAll()
-                    .successHandler(restAuthenticationSuccessHandler)
+                    .successHandler(successHandler())
                     .usernameParameter("username")
                     .passwordParameter("password")
+
                     .and()
                     .logout()
                     .logoutUrl("/logout")
