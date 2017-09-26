@@ -23,3 +23,16 @@ INSERT INTO employeetype(referenceId,createdBy,createdAt,version,name,type)VALUE
 
 INSERT INTO user(referenceId,createdBy,createdAt,version,accountId,locationId,employeeId,firstName,lastName,email,functionGroup)
 VALUES (UUID(),'user',NOW(),0,1,1,1,'Muhammad Umar','Hussain','muhussain@nisum.com','Software Developement');
+
+
+--  operations
+INSERT INTO Account (referenceId, username, password, enabled, credentialsexpired, expired,
+                     locked, version, createdBy, createdAt, updatedBy, updatedAt)
+VALUES (UUID(), 'zohaib', '$2a$10$CoMVfutnv1qZ.fNlHY1Na.rteiJhsDF0jB1o.76qXcfdWN6As27Zm', true, false, true, false, 0, 'user', NOW(), NULL, NULL);
+
+INSERT INTO AccountRole (accountId, roleId) SELECT a.id, r.id FROM Account a, Role r WHERE a.username = 'zohaib' and r.id = 1;
+
+INSERT INTO user(referenceId,createdBy,createdAt,version,accountId,locationId,employeeId,firstName,lastName,email,functionGroup)
+VALUES (UUID(),'user',NOW(),0,3,1,1,'Muhammad Zohaib','Abbasi','muhussain@nisum.com','Software Developement');
+
+
