@@ -1,4 +1,4 @@
-package com.leanstacks.ws;
+package com.leanstacks.ws.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +30,7 @@ public class ApiDocsConfiguration {
     /**
      * The project contact information.
      */
-    public static final String PROJECT_CONTACT = "LeanStacks.com";
+    public static final String PROJECT_CONTACT = "Ehours";
 
     /**
      * Create a Docket class to be used by Springfox's Swagger API Documentation framework. See
@@ -43,8 +43,7 @@ public class ApiDocsConfiguration {
         final Predicate<String> paths = PathSelectors.ant("/api/**");
 
         final ApiInfo apiInfo = new ApiInfoBuilder().title("Project Skeleton for Spring Boot Web Services")
-                .description("The Spring Boot web services starter project provides a foundation "
-                        + "to rapidly construct a RESTful web services application.")
+                .description("EHours Internal Application")
                 .contact(PROJECT_CONTACT).version(PROJECT_VERSION).build();
 
         final Docket docket = new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo).select().paths(paths).build();

@@ -3,12 +3,7 @@ package com.leanstacks.ws.model;
 import java.io.Serializable;
 import java.util.UUID;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Version;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.joda.time.DateTime;
@@ -33,6 +28,7 @@ public class TransactionalEntity implements Serializable {
      */
     @Id
     @GeneratedValue
+    @Column(unique = true,nullable = false)
     private Long id;
 
     /**

@@ -1,4 +1,4 @@
-package com.leanstacks.ws;
+package com.leanstacks.ws.configuration.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.leanstacks.ws.security.AccountAuthenticationProvider;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 /**
  * The SecurityConfiguration class provides a centralized location for
@@ -136,8 +138,12 @@ public class SecurityConfiguration {
      */
     @Profile("docs")
     @Configuration
-    public static class FormLoginWebSecurityConfigurerAdapter
-            extends WebSecurityConfigurerAdapter {
+    public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+             @Autowired
+              private HttpStatusReturningLogoutSuccessHandler logoutSuccessHandler;
+
+             @Autowired
+             private AuthenticationSuccessHandler restAuthenticationSuccessHandler;
 
         @Override
         protected void configure(final HttpSecurity http) throws Exception {
@@ -149,7 +155,16 @@ public class SecurityConfiguration {
               .authorizeRequests()
                 .anyRequest().authenticated()
               .and()
-              .formLogin();
+              .formLogin()
+                    .loginProcessingUrl("/authenticate").permitAll()
+                    .successHandler(restAuthenticationSuccessHandler)
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .and()
+                    .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessHandler(logoutSuccessHandler)
+                    .deleteCookies().permitAll();
             
             // @formatter:on
 

@@ -2,12 +2,7 @@ package com.leanstacks.ws.model;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -22,6 +17,7 @@ public class Account extends TransactionalEntity {
     private static final long serialVersionUID = 1L;
 
     @NotNull
+    @Column(unique = true)
     private String username;
 
     @NotNull
