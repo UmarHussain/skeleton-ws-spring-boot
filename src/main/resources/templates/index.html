@@ -3,11 +3,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="EHOURS" />
+    <meta name="keywords" content="USER INFO" />
+    <meta name="author" content="EHOURS" />
     <title>User Info</title>
 </head>
 <body>
 User Info :
+</br>
+<div>User Name : <span th:text="${appUserDto.userName}"></span></div>
 
-User Name : <p th:text="#{appUserDto.userName}"></p>
+<div>First Name : <span th:text="${appUserDto.firstName}"></span> </div>
+<div>Last Name :  <span th:text="${appUserDto.lastName}"></span> </div>
+<div> Email     : <span th:text="${appUserDto.email}">   </span>    </div>
+<!--<td th:text="${agencyList.code}"></td>-->
 </body>
 </html>

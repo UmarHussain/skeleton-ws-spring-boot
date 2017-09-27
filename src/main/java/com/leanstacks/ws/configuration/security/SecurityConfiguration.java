@@ -85,6 +85,7 @@ public class SecurityConfiguration {
             
             http
             .csrf().disable()
+            .antMatcher("/index")
             .antMatcher("/api/**")
               .authorizeRequests()
                 .anyRequest().hasRole("USER")
@@ -167,7 +168,8 @@ public class SecurityConfiguration {
               .and()
               .formLogin()
                     .loginProcessingUrl("/authenticate").permitAll()
-                    .successHandler(successHandler())
+                    //.successHandler(successHandler())
+                    .successHandler(restAuthenticationSuccessHandler)
                     .usernameParameter("username")
                     .passwordParameter("password")
 

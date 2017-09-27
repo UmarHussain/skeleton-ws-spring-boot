@@ -3,6 +3,7 @@ package com.leanstacks.ws.web.api;
 import com.leanstacks.ws.dtos.AppUserDto;
 import com.leanstacks.ws.service.UserService;
 import com.leanstacks.ws.util.IAuthenticationFacade;
+import com.leanstacks.ws.util.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,10 @@ public class PageController {
     @Autowired
     private IAuthenticationFacade authenticationFacade;
 
-    @RequestMapping(value = "/api/index", method = RequestMethod.GET)
-    public ModelAndView getIndexPage(@RequestParam Optional<String> error) {
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public ModelAndView getIndexPage() {
+
+        //String username = RequestContext.getUsername();
 
         String username = authenticationFacade.getAuthentication().getName();
 
